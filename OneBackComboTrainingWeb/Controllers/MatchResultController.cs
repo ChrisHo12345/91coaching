@@ -3,12 +3,12 @@
 public class MatchResultController
 {
     private string _matchResult = "0:0(First Half)";
-    private string _matchResultRepo;
+    private string _matchResultRepo = "";
     private string _previousMatchResult = "";
     private int _homeScore;
     private int _awayScore;
     private string _period = "First Half";
-    private Dictionary<string, string> _matchResultLookup = new()
+    private readonly Dictionary<string, string> _matchResultLookup = new()
     {
         {"homeGoal","H"},
         {"awayGoal","A"},
@@ -23,18 +23,20 @@ public class MatchResultController
     public void ReceivedEvent(string soccerEvent)
     {
         _matchResultRepo = $"{_previousMatchResult}{_matchResultLookup[soccerEvent]}";
+        _matchResult = MatchResultParser(_matchResultRepo);
+    }
 
-        List<char> lsMatchResultChars = _matchResultRepo.ToCharArray().ToList();
-        _period = _matchResultRepo.Contains(";") ? "Second Half" : "First Half";
+    private string MatchResultParser(string matchResultRepo)
+    {
+        List<char> lsMatchResultChars = matchResultRepo.ToCharArray().ToList();
+        _period = matchResultRepo.Contains(";") ? "Second Half" : "First Half";
         _homeScore = lsMatchResultChars.Count(x => x == 'H');
         _awayScore = lsMatchResultChars.Count(x => x == 'A');
-
-        _matchResult = $"{_homeScore}:{_awayScore}({_period})";
+        return $"{_homeScore}:{_awayScore}({_period})";
     }
 
     public void GetMatchResultRepo(string matchResultRepo)
     {
         _previousMatchResult = matchResultRepo;
-
     }
 }
