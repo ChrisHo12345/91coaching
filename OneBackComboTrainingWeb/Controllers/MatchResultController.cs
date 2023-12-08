@@ -15,7 +15,7 @@ public class MatchResultController
         {"periodChange",";"},
     };
     
-    public string GetMatchResult()
+    public string UpdateMatchResult()
     {
         return _matchResult;
     }
