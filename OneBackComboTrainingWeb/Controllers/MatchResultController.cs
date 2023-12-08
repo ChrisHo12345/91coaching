@@ -8,13 +8,13 @@ public class MatchResultController
     private int _homeScore;
     private int _awayScore;
     private string _period = "First Half";
-    private Dictionary<string, string> _matchResultLookup = new Dictionary<string, string>
+    private Dictionary<string, string> _matchResultLookup = new()
     {
         {"homeGoal","H"},
         {"awayGoal","A"},
         {"periodChange",";"},
     };
-
+    
     public string GetMatchResult()
     {
         return _matchResult;
