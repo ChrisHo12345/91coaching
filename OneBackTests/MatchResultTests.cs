@@ -87,6 +87,6 @@ public class MatchResultTests
 
     private void ScoreShouldBe(string expected)
     {
-        Assert.That(_matchResult.UpdateMatchResult(),Is.EqualTo(expected));
+        Assert.That(_matchResult.GetMatchResult(),Is.EqualTo(expected));
     }
 }
